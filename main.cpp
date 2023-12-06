@@ -51,7 +51,7 @@ int main() {
 
   graph.primMST();
 
-  graph.minDistDijk(3);
+  graph.minDistDijk("Second");
 
   return 0;
 }

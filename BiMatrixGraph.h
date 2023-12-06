@@ -230,14 +230,16 @@ public:
         }
       }
     }
+    
+      cout << "Vertex\t\tShortest distance from vertex " << main << endl;
 
-    cout << "Vertex\t\tDistance from selected vertex" << endl;
-    for (int i = 0; i < numVerts; i++) {
-      cout << i << "\t\t\t" << distance[i] << endl;
-    }
+      for (int i = 0; i < numVerts; i++) {
+        cout << i << "\t\t\t" << distance[i] << endl;
+      }
+    
   }
 
-  void minDistDijk(string mainS, string secondK) {
+  void minDistDijk(string mainS) {
     int *distance = new int[numVerts];
     bool *visited = new bool[numVerts];
     int main;
@@ -267,12 +269,12 @@ public:
       }
     }
 
-    for (int i = 0; i < numVerts; i++) {
-      if (key[i] == secondK) {
-        cout << key[i] << " is " << distance[i] << " away from " << key[main]
-             << endl;
+    cout << "Vertex\t\tShortest distance from " << key[main] << endl;
+
+      for (int i = 0; i < numVerts; i++) {
+        cout << key[i] << "\t\t\t" << distance[i] << endl;
       }
-    }
+    
   }
 
   void print() {
