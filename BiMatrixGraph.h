@@ -1,10 +1,3 @@
-/*
- * File:   BiMatrixGraph.h
- * Author: Kyle
- *
- * Created on June 2, 2023, 10:48 AM
- */
-
 #ifndef BIMATRIXGRAPH_H
 #define BIMATRIXGRAPH_H
 
@@ -21,6 +14,7 @@ private:
   int numVerts;
   string *key;
   bool usingKey = false;
+  const int WIDTH_KEY = 15;
 
   void printMST(int parent[]) {
     int total = 0;
@@ -269,10 +263,10 @@ public:
       }
     }
 
-    cout << "Vertex\t\tShortest distance from " << key[main] << endl;
+    cout << setw(WIDTH_KEY) << "Vertex" << "Shortest distance from " << key[main] << endl;
 
       for (int i = 0; i < numVerts; i++) {
-        cout << key[i] << "\t\t\t" << distance[i] << endl;
+        cout << setw(WIDTH_KEY) << key[i] << distance[i] << endl;
       }
     
   }
@@ -293,16 +287,16 @@ public:
         }
       }
     } else {
-      cout << "    ";
+      cout << "           ";
       for (int i = 0; i < numVerts; i++) {
-        cout << setw(8) << left << key[i] << " ";
+        cout << setw(WIDTH_KEY) << left << key[i] << " ";
       }
       cout << endl;
       for (int i = 0; i < numVerts; i++) {
         cout << endl;
-        cout << setw(8) << left << key[i] << " ";
+        cout << setw(WIDTH_KEY) << left << key[i] << " ";
         for (int j = 0; j < numVerts; j++) {
-          cout << setw(8) << left << graph[j][i] << " ";
+          cout << setw(WIDTH_KEY) << left << graph[j][i] << " ";
         }
       }
     }

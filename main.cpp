@@ -1,10 +1,3 @@
-/*
- * File:   main.cpp
- * Author: Kyle
- *
- * Created on June 2, 2023, 10:46 AM
- */
-
 #include <cstdlib>
 #include <iostream>
 
@@ -13,45 +6,26 @@
 using namespace std;
 
 int main() {
-  srand(time(0));
-  BiMatrixGraph graph = BiMatrixGraph(5);
+  BiMatrixGraph graph = BiMatrixGraph(4);
+  string key[] = {"Riverside", "Moreno Valley", "Perris", "Hemet"};
+  string* keyPtr = key;
+
+  graph.setKey(keyPtr);
+
+  graph.addWeight("Riverside", "Perris", 24);
+  graph.addWeight("Riverside", "Moreno Valley", 16);
+  graph.addWeight("Riverside", "Hemet", 33);
+
+  graph.addWeight("Perris", "Moreno Valley", 18);
+  graph.addWeight("Perris", "Hemet", 30);
+
+  graph.addWeight("Moreno Valley", "Hemet", 26);
 
   graph.print();
-
-  for (int i = 0; i < 50; i++) {
-    graph.addWeight(rand() % 5, rand() % 5, rand() % 5 + 1);
-  }
-
-  graph.print();
-
-  graph.addVertex();
-
-  graph.print();
-
-  graph.addEdge(1, 5);
-
-  graph.addWeight(5, 4, 2);
-
-  graph.print();
-
-  graph.delVertex(2);
-
-  graph.print();
-
-  string* key = new string[graph.getNumVerts()];
-  key[0] = "First";
-  key[1] = "Second";
-  key[2] = "Third"; 
-  key[3] = "Fourth";
-  key[4] =  "Fifth";
   
-  graph.setKey(key);
+  graph.primMST(); //NEED TO FIX
 
-  graph.print();
-
-  graph.primMST();
-
-  graph.minDistDijk("Second");
+  graph.minDistDijk("Hemet");
 
   return 0;
 }
