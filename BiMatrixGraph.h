@@ -3,7 +3,7 @@
 
 #include <iomanip>
 #include <iostream>
-#include <limits.h>
+#include <limits.h> //Used for Minimun Spaning Tree
 #include <string>
 
 using namespace std;
@@ -14,7 +14,7 @@ private:
   int numVerts;
   string *key;
   bool usingKey = false;
-  const int WIDTH_KEY = 15;
+  const int WIDTH_KEY = 15; //For setw()
 
   void printMST(int parent[]) {
     int total = 0;
@@ -26,11 +26,12 @@ private:
         total += graph[i][parent[i]];
       }
     } else {
-      cout << "\tMSP\n-----------------------\n";
-      cout << "Edge \t\tWeight" << endl;
+      cout << "\t\tMSP\n------------------------------------------\n";
+      cout << "Edge \t\t\t\tWeight" << endl;
       for (int i = 1; i < numVerts; i++) {
-        cout << key[parent[i]] << " - " << key[i] << " \t"
-             << graph[i][parent[i]] << endl;
+        cout << key[parent[i]] << " - " <<  key[i] << "\t";
+        if (i != 1) cout <<"\t";
+             cout << graph[i][parent[i]] << endl;
         total += graph[i][parent[i]];
       }
     }
@@ -49,6 +50,21 @@ private:
     }
 
     return min_index;
+  }
+
+  void DFSUtil(bool* visited, int currNode, int numVisited){
+    visited[currNode] = true;
+    numVisited++;
+
+    if (numVisited < numVerts) cout << key[currNode] << " -> ";
+    else cout << key[currNode];
+    
+    
+    for (int i = 0; i < numVerts; i++){
+      if(!visited[i] && graph[currNode][i] != 0){
+        DFSUtil(visited, i, numVisited);
+      }
+    }
   }
 
 public:
@@ -161,30 +177,41 @@ public:
     graph[yIndx][xIndx] = 0;
   }
 
+  void DFS(int currNode){
+    bool* visited = new bool[numVerts];
+
+    for (int i = 0; i < numVerts; i++){
+      visited[i] =  false;
+    }
+
+    DFSUtil(visited,currNode, 0);
+    cout << endl;
+  }
+
   void primMST() {
-    // Array to store constructed MST
+    //Array to store MST
     int *parent = new int[numVerts];
 
-    // Key values used to pick minimum weight edge in cut
+    //Key values used to pick minimum weight
     int *distance = new int[numVerts];
 
-    // To represent set of vertices included in MST
+    //To represent set of vertices included in MST
     bool *visited = new bool[numVerts];
 
-    // Initialize all keys as INFINITE
+    //Initialize all weight as INFINITE and visited to false
     for (int i = 0; i < numVerts; i++) {
       distance[i] = INT_MAX, visited[i] = false;
     }
 
-    // Distance to first vertex to itself is 0
+    //Distance to first vertex to itself is 0
     distance[0] = 0;
 
-    // First node is always root of MST
+    //First node is always root of MST
     parent[0] = -1;
 
-    for (int count = 0; count < numVerts - 1; count++) {
+    for (int i = 0; i < numVerts - 1; i++) {
 
-      // Pick the minimum weighted distance to the vertices not visited
+      //Pick the minimum weighted distance to the vertices not visited
       int u = minKey(distance, visited);
 
       // Add the picked vertex to the visited set
