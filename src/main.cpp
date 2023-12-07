@@ -7,7 +7,8 @@ using namespace std;
 
 int main() {
   //Initialize graph with 4 nodes
-  BiMatrixGraph graph = BiMatrixGraph(4);
+  const int NUM_VERTS = 4;
+  BiMatrixGraph graph = BiMatrixGraph(NUM_VERTS);
 
   //initialize key so we don't have to remember indexes
   string key[] = {"Riverside", "Moreno Valley", "Perris", "Hemet"};
@@ -33,10 +34,10 @@ int main() {
 
   //Use depth first search to find quickest connection without back tracking
   cout << "Shortest path between all cities" << endl;
-  graph.DFS(0);
-  graph.DFS(1);
-  graph.DFS(2);
-  graph.DFS(3);
+  for (int i = 0; i < NUM_VERTS; i++){
+    graph.DFS(i);
+  }
+  
   cout << endl;
 
   //Using the prim minimum spanning tree algorithim to find 
