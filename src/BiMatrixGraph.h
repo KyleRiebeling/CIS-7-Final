@@ -45,7 +45,8 @@ private:
 
     for (int i = 0; i < numVerts; i++) {
       if (visited[i] == false && distance[i] <= min) {
-        min = distance[i], min_index = i;
+        min = distance[i];
+        min_index = i;
       }
     }
 
